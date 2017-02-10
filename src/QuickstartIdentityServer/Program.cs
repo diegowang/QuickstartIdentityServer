@@ -11,8 +11,11 @@ namespace QuickstartIdentityServer
     {
         public static void Main(string[] args)
         {
+            Console.Title = "IdentityServerTesting";
+
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseUrls("http://localhost::62671")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
