@@ -14,11 +14,20 @@ namespace Client
             // discover endpoints from metadata
             var disco = await DiscoveryClient.GetAsync("http://localhost:5000");
 
+            #region clientCredential
             // request token. To create an instance you need to pass in the token endpoint address, client id and secret.
-            var tokenClient = new TokenClient(disco.TokenEndpoint, "client", "secret");
+            //var tokenClient = new TokenClient(disco.TokenEndpoint, "client", "secret");
 
             //use the RequestClientCredentialsAsync method to request a token for your API
-            var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api1");
+            //var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api1");
+            #endregion
+
+            #region ResoureceOwner
+            // request token
+            var tokenClient = new TokenClient(disco.TokenEndpoint, "ro.client", "secret");
+            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice", "password1", "api1");
+            
+            #endregion
 
             if (tokenResponse.IsError)
             {
