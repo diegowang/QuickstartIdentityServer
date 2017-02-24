@@ -13,6 +13,7 @@ namespace WebUI
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseUrls("http://lcoalhost:5002")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
