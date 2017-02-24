@@ -1,5 +1,6 @@
 ﻿using IdentityServer4.Models;
 using System.Collections.Generic;
+using IdentityServer4;
 using IdentityServer4.Test;
 
 namespace QuickstartIdentityServer
@@ -59,6 +60,23 @@ namespace QuickstartIdentityServer
                         new Secret("secret".Sha256())
                     },
                     AllowedScopes = {"api1"}
+                },
+
+                // OpenID Connect implicit flow client (MVC)
+                new Client
+                {
+                    ClientId = "mvc",
+                    ClientName = "MVC Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+
+                    RedirectUris = { "http://localhost:5002/signin-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:5002" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
                 }
             };
         }
