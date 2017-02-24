@@ -16,10 +16,12 @@ namespace QuickstartIdentityServer
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // configure identity server with in-memory stores, keys, clients and scopes
             services.AddIdentityServer()
                 .AddTemporarySigningCredential()
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients())
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddTestUsers(Config.GetUsers());
         }
 
