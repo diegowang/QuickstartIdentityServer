@@ -126,6 +126,34 @@ namespace QuickstartIdentityServer.Controllers
         }
 
         /// <summary>
+        /// Handle logout page postback
+        /// </summary>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout(LogoutInputModel model)
+        {
+            var vm = await _account.BuildLoggedOutViewModelAsync(model.LogoutId);
+            if (vm.TriggerExternalSignout)
+            {
+                string url = Url.Action("Logout", new {logoutId = vm.LogoutId});
+                try
+                {
+                    // hack: try/catch to handle social providers that throw
+                    await HttpContext.Authentication.SignOutAsync(vm.ExternalAuthenticationScheme,
+                        new AuthenticationProperties {RedirectUri = url});
+                }
+                catch (NotSupportedException) // this is for the external providers that don't have signout
+                {
+                }
+                catch(InvalidOperationException) {} // this is for Windows/Negotiate
+            }
+
+                // delete local authentication cookie
+            await HttpContext.Authentication.SignOutAsync();
+            return View("LoggedOut", vm);
+        }
+
+        /// <summary>
         /// initiate roundtrip to external authentication provider
         /// </summary>
         [HttpGet]
