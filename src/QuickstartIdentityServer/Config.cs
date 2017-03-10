@@ -69,7 +69,10 @@ namespace QuickstartIdentityServer
                     ClientName = "MVC Client",
                     AllowedGrantTypes = GrantTypes.Implicit,
 
+                    // where to redirect to after login
                     RedirectUris = { "http://localhost:5002/signin-oidc" },
+
+                    // where to redirect to after logout
                     PostLogoutRedirectUris = { "http://localhost:5002" },
 
                     AllowedScopes =
