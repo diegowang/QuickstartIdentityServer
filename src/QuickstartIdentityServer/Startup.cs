@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using IdentityServer4;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace QuickstartIdentityServer
 {
@@ -33,6 +35,40 @@ namespace QuickstartIdentityServer
             }
 
             app.UseIdentityServer();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+
+                AutomaticAuthenticate = false,
+                AutomaticChallenge = false
+            });
+
+            app.UseGoogleAuthentication(new GoogleOptions
+            {
+                AuthenticationScheme = "Google",
+                DisplayName = "Google",
+                SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+
+                ClientId = "992842742311-s1rhm4grruq22slu2so9re8no9vt28uq.apps.googleusercontent.com",
+                ClientSecret = "aAxSyWWp3Za7j796ECDhC4jC"
+            });
+
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+            {
+                SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+                SignOutScheme = IdentityServerConstants.SignoutScheme,
+
+                DisplayName = "OpenID Connect",
+                Authority = "https://demo.identityserver.io/",
+                ClientId = "implicit",
+
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    NameClaimType = "name",
+                    RoleClaimType = "role"
+                }
+            });
 
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
