@@ -1,5 +1,6 @@
 ﻿using IdentityServer4.Models;
 using System.Collections.Generic;
+using System.Security.Claims;
 using IdentityServer4;
 using IdentityServer4.Test;
 
@@ -92,13 +93,25 @@ namespace QuickstartIdentityServer
                     {
                         SubjectId = "1",
                         Username = "alice",
-                        Password = "password1"
+                        Password = "password1",
+
+                        Claims = new []
+                        {
+                            new Claim("name", "Alice"),
+                            new Claim("website", "https://alice.com")
+                        }
                     },
                     new TestUser
                     {
                         SubjectId = "2",
                         Username = "bob",
-                        Password = "password2"
+                        Password = "password2",
+
+                        Claims = new []
+                        {
+                            new Claim("name", "Bob"),
+                            new Claim("website", "https://bob.com")
+                        }
                     }
             };
         }
