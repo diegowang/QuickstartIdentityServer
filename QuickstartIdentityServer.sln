@@ -18,6 +18,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Client", "src\Client\Client
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebUI", "src\WebUI\WebUI.xproj", "{56D1D359-6F24-4E1F-B10B-5858FAA05030}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityServerWithAspNetIdentity", "src\IdentityServerWithAspNetIdentity\IdentityServerWithAspNetIdentity.xproj", "{AFA7961F-9A65-4C20-9301-C090054C34D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{56D1D359-6F24-4E1F-B10B-5858FAA05030}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56D1D359-6F24-4E1F-B10B-5858FAA05030}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56D1D359-6F24-4E1F-B10B-5858FAA05030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFA7961F-9A65-4C20-9301-C090054C34D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFA7961F-9A65-4C20-9301-C090054C34D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFA7961F-9A65-4C20-9301-C090054C34D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFA7961F-9A65-4C20-9301-C090054C34D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,5 +55,6 @@ Global
 		{CFAF78EB-3E50-4E71-874B-24BA02C83582} = {A9073EE2-3F31-42F7-8079-E9B5CA9676D6}
 		{EA0227C9-90D8-4466-9EFE-3EF1F1571690} = {A9073EE2-3F31-42F7-8079-E9B5CA9676D6}
 		{56D1D359-6F24-4E1F-B10B-5858FAA05030} = {A9073EE2-3F31-42F7-8079-E9B5CA9676D6}
+		{AFA7961F-9A65-4C20-9301-C090054C34D9} = {A9073EE2-3F31-42F7-8079-E9B5CA9676D6}
 	EndGlobalSection
 EndGlobal
