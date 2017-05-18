@@ -17,6 +17,7 @@
     },
     "JavaScriptClient": {
       "commandName": "Project",
+      "launchBrowser": true,
       "launchUrl": "http://localhost:5006",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
