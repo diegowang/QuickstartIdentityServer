@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using IdentityServerWithAspNetIdentity.Data;
 using IdentityServerWithAspNetIdentity.Models;
 using IdentityServerWithAspNetIdentity.Services;
+using QuickstartIdentityServer;
 
 namespace IdentityServerWithAspNetIdentity
 {
@@ -57,6 +58,14 @@ namespace IdentityServerWithAspNetIdentity
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            // Adds IdentityServer
+            services.AddIdentityServer()
+                .AddTemporarySigningCredential()
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                .AddInMemoryApiResources(Config.GetApiResources())
+                .AddInMemoryClients(Config.GetClients())
+                .AddAspNetIdentity<ApplicationUser>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,6 +92,9 @@ namespace IdentityServerWithAspNetIdentity
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            // Adds IdentityServer
+            app.UseIdentityServer();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
