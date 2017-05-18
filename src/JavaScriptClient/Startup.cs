@@ -32,6 +32,9 @@ namespace JavaScriptClient
             {
                 await context.Response.WriteAsync("Hello World!");
             });
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
         }
     }
 }
