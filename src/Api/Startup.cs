@@ -37,7 +37,21 @@ namespace Api
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddMvc();
+            services.AddCors(options =>
+            {
+                // this defines a CORS policy called "default"
+                options.AddPolicy("default", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5006")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
+            //services.AddMvc();
+            services.AddMvcCore()
+        .AddAuthorization()
+        .AddJsonFormatters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -49,6 +63,9 @@ namespace Api
             app.UseApplicationInsightsRequestTelemetry();
 
             app.UseApplicationInsightsExceptionTelemetry();
+
+            // this uses the policy called "default"
+            app.UseCors("default");
 
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
