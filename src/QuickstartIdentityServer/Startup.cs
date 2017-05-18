@@ -13,6 +13,18 @@ namespace QuickstartIdentityServer
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                // this defines a CORS policy called "default"
+                options.AddPolicy("default", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5006")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
+
             services.AddMvc();
 
             // configure identity server with in-memory stores, keys, clients and scopes
@@ -33,6 +45,10 @@ namespace QuickstartIdentityServer
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // this uses the policy called "default"
+            app.UseCors("default");
+
 
             app.UseIdentityServer();
 
